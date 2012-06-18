@@ -38,6 +38,7 @@
 			                        		  vehicleOperations.dialog({width:"680px",title:vehicleOperations.find("title").text()});
 			                        		  
 			                        	  });
+			                        	  // Handler will be called when + button is clicked
 			                        	  $(".addVehicle").click(function(){
 			                        		  var vehicleOperations=$("#vehicleOperations");
 			                        		  $(".deleteVehicle",vehicleOperations).hide();
@@ -55,7 +56,8 @@
 </head>
 <body>
     <input type=button class="button addVehicle" style="position:absolute; right:0px" value="+">
-	<table class="showdetails sortable"></table>
+    <table class="showdetails sortable"></table>
 	<div id="vehicleOperations" style="display:none"></div>
+	
 </body>
 </html>
