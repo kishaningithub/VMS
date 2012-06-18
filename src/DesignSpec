@@ -1,0 +1,60 @@
+                                             
+project Name: --------------
+
+First Page: Login 
+
+       i) admin(my bro)
+      ii) other user (my uncle and employeers)
+     iii) should have one sign up form in this page
+
+Second page: List of Vehicles,Vechical detials
+
+   List of vehicles:
+  
+vehicleNo vehicDesc status place driverName phoneNo 
+
+    Vehical details:
+
+vehicleNo vehicleDesc ownerNmae InsuranceNo(Startdate to enddate) rcNo fcDate 
+
+
+
+third Page: driverDetails, driverAttendance
+
+   driveDetails: 
+
+empId empNmae licenceNo  dateofJoining conAddress phoneNo
+
+
+   driver Attendance
+
+empId empName date attendance overTime 
+-----------------------------------------------------------------------------------------------------------
+DB
+Vehicle
+-------
+vehicleNo PK
+vehicleDesc
+ownerName 
+InsuranceNo
+InsuranceStartdate
+InsuranceEnddate
+rcNo 
+fcDate 
+status(shed or running)
+place
+ 
+Driver
+------
+licenceNo  PK
+driverName 
+dateofJoining
+contAddress
+phoneNo
+ 
+Driver Attendance
+-----------------
+licenceNo   FK
+vechicleNo FK 
+date attendance(OnDuty OffDuty)
+overTime(No. of hrs) 

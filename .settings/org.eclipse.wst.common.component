@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+	<wb-module deploy-name="Vehicle_Management_System-VMS">
+		<wb-resource deploy-path="/" source-path="/WebContent"
+			tag="defaultRootSource" />
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src" />
+		<property name="context-root" value="Vehicle_Management_System-VMS" />
+		<property name="java-output-path" value="/Vehicle_Management_System-VMS/build/classes" />
+	</wb-module>
+</project-modules>

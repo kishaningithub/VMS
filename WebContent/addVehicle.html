@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Enter The Vehicle Details</title>
+<link type="text/css"
+	href="styles/smoothness/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.8.20.custom.min.js"></script>
+</head>
+<body background="images/car.jpg">
+<form id ="call" action="addVehicle">
+<table>
+<tr><td>
+Vehicle Number:</td><td>&nbsp<input name="vehicleNo"></td></tr> 
+<tr><td>
+Vehicle Description:</td><td>&nbsp<input name="vehicleDesc"></td></tr>
+
+<tr><td>
+
+Owner Name:</td><td>&nbsp<input name="ownerName"></td></tr>
+
+<tr><td>
+Insurance Number:</td><td>&nbsp<input name="insuranceNo"></td></tr>
+
+<tr><td>
+Insurance Date </td><td>&nbsp<input class="date" name="insuranceStartDate"></td><td>To <input class="date"name="insuranceEndDate"></td></tr>
+
+<tr><td>
+RC Number:</td><td>&nbsp<input name="rcNo"></td></tr>
+
+<tr><td>
+FC Date:</td><td>&nbsp<input class="date" name="fcDate"></td></tr>
+<input type="hidden" name="recordStatus" value="A">
+</table>
+<br>
+
+<left><dd>&nbsp&nbsp&nbsp&nbsp&nbsp
+<script type="text/javascript">
+function myFunction()
+{
+alert("You Have Successfully Entered The Driver Details!!!!");
+}
+
+function displayDate()
+{
+document.getElementById("demo").innerHTML=Date();
+}
+
+function formReset()
+{
+document.getElementById("call").reset();
+}
+$(document).ready(function(){
+ $(".date").datepicker({dateFormat:'dd/M/yy'});
+ 
+ $(".submit").click(function(){
+	$("input[name='vehicleNo']").prop("disabled",false);
+	$.get("addVehicle",
+		  $("form").serialize(),
+		  function(data){
+		    alert("Form Submitted Successfully !!!!");
+	      })
+	      .error(function(){
+		    alert("Internal Error has occured so kelambu katthottam!")
+	      });
+	$("input[name='vehicleNo']").prop("disabled",true);
+ });
+ $(".button").button();
+ $(".deleteVehicle").click(function(){
+  $( "#dialog-confirm" ).dialog({
+	resizable: false,
+	height:140,
+	modal: true,
+	buttons: {
+		"Delete": function() {
+				$( this ).dialog( "close" );
+				$("input[name='recordStatus']").val("D");
+				$(".submit").click();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+ });
+});
+
+</script>
+<input type="button" class="submit button" value="Add/Update">
+<input type="button" class="button deleteVehicle" value="Delete">
+</form>
+<div id="dialog-confirm"  style="display:none" title="Delete?">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
+<br>
+<br>
+<br>
+</left>
+</body>
+</html>

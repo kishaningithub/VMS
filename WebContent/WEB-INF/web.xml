@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Vehicle_Management_System-VMS</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>addVehicle</display-name>
+    <servlet-name>addVehicle</servlet-name>
+    <servlet-class>com.vms.servlets.addVehicle</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>addDriver</display-name>
+    <servlet-name>addDriver</servlet-name>
+    <servlet-class>com.vms.servlets.addDriver</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addVehicle</servlet-name>
+    <url-pattern>/addVehicle</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addDriver</servlet-name>
+    <url-pattern>/addDriver</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Detail</display-name>
+    <servlet-name>Detail</servlet-name>
+    <servlet-class>com.vms.servlets.Detail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Detail</servlet-name>
+    <url-pattern>/Detail</url-pattern>
+  </servlet-mapping>
+</web-app>
