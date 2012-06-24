@@ -94,14 +94,14 @@ public class Vehicle
 	}
 	public void changeTo(Vehicle vehicle)
 	{
-		this.setVehicleDesc(vehicle.getVehicleDesc());
-		this.setRcNo(vehicle.getRcNo());
-		this.setOwnerName(vehicle.getOwnerName());
-		this.setInsuranceNo(vehicle.getInsuranceNo());
-		this.setInsuranceStartDate(vehicle.getInsuranceStartDate());
-		this.setInsuranceEndDate(vehicle.getInsuranceEndDate());
-		this.setFcDate(vehicle.getFcDate());
-		this.setRecordStatus(vehicle.getRecordStatus());
+		setVehicleDesc(vehicle.getVehicleDesc());
+		setRcNo(vehicle.getRcNo());
+		setOwnerName(vehicle.getOwnerName());
+		setInsuranceNo(vehicle.getInsuranceNo());
+		setInsuranceStartDate(vehicle.getInsuranceStartDate());
+		setInsuranceEndDate(vehicle.getInsuranceEndDate());
+		setFcDate(vehicle.getFcDate());
+		setRecordStatus(vehicle.getRecordStatus());
 	}
 	
 	

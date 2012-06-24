@@ -14,6 +14,7 @@ public class DriverDetails
 	Date dateofJoining;
 	String contAddress;
 	String phoneNo;
+	String recordStatus;
 	
 	public String getLicenceNo()
 	{
@@ -55,6 +56,21 @@ public class DriverDetails
 	{
 		this.phoneNo = phoneNo;
 	}
-	
+	public String getRecordStatus()
+	{
+		return recordStatus;
+	}
+	public void setRecordStatus(String recordStatus)
+	{
+		this.recordStatus = recordStatus;
+	}
+	public void changeTo(DriverDetails driver)
+	{
+		setDriverName(driver.getDriverName()); 
+		setDateofJoining(driver.getDateofJoining());
+		setContAddress(driver.getContAddress());
+		setPhoneNo(driver.getPhoneNo());
+		setRecordStatus(driver.getRecordStatus());
+	}
 
 }

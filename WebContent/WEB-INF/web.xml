@@ -2,12 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>Vehicle_Management_System-VMS</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>vms.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -31,12 +26,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Detail</display-name>
-    <servlet-name>Detail</servlet-name>
-    <servlet-class>com.vms.servlets.Detail</servlet-class>
+    <display-name>VehicleServlet</display-name>
+    <servlet-name>VehicleServlet</servlet-name>
+    <servlet-class>com.vms.servlets.VehicleServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Detail</servlet-name>
-    <url-pattern>/Detail</url-pattern>
+    <servlet-name>VehicleServlet</servlet-name>
+    <url-pattern>/VehicleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DriverServlet</display-name>
+    <servlet-name>DriverServlet</servlet-name>
+    <servlet-class>com.vms.servlets.DriverServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DriverServlet</servlet-name>
+    <url-pattern>/DriverServlet</url-pattern>
   </servlet-mapping>
 </web-app>

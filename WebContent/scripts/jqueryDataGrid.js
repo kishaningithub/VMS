@@ -5,28 +5,43 @@
 				afterTableCreate : null,
 				dateFormat : 'dd-MMM-yyyy',
 				colWidth:null,
-				caseSensitive:false
-			}
+				highlightOnSelect:true,
+				caseSensitiveSearch:false,
+				loadingGif:false,
+				hideColumns:false,
+				columnOrder:false,
+				columnNames:false
+			};
 			$.extend(settings, options);
 			var table = $(this);
 			var dataSource = settings['dataSource'];
 			var afterTableCreate = settings['afterTableCreate'];
 			var dateFormat = settings['dateFormat'];
 			var colWidth = settings['colWidth'];
-			var caseSensitive = settings['caseSensitive'];
+			var highlightOnSelect = settings['highlightOnSelect'];
+			var caseSensitiveSearch = settings['caseSensitiveSearch'];
+			var loadingGif = settings['loadingGif'];
+			var hideColumns = settings['hideColumns'];
+			var columnOrder = settings['columnOrder'];
+			var columnNames= settings['columnNames'];
 			//check whether datasoure and the table element exists
 			if (!(dataSource || table.length > 0))
 				return;
-			// Getting the contents of table from datasource
+			//removing all inner elements of table
+			table.empty();
+			//add loading Gif when image is loading if loadingGif parameter is set
+			if(loadingGif)
+			 $("<img src="+loadingGif+" />").appendTo(table);
+		    // Getting the contents of table from datasource
 			$.get(dataSource, function(data) {
+				table.empty();
 				var tableHeading = $("<thead></thead>");
 				//inserting search box into tableHeading
 				var firstRow = $("<tr></tr>");
 				var vehicleList = $(data).children().children();
 				vehicleList.first().children().each(
 						function(index) {
-							$("<td><input style='width:100%'/></td>").appendTo(
-									firstRow);
+							$("<td dval="+this.tagName +"><input style='width:100%'/></td>").appendTo(firstRow);
 						});
 				firstRow.appendTo(tableHeading);
 				// inserting heading into tableHeading
@@ -43,16 +58,45 @@
 					$(this).children().each(
 							function(index) {
 								var value=Date.parse($(this).text());
-								if(value)
+								var align="left";
+								if(value){
 								 value= $.format.date(Date.parse($(this).text()), dateFormat);
+								 align="center";
+								}
 								else
 								 var value=$(this).text();
-								$("<td dval="+this.tagName+">" + value + "</td>").appendTo(
+								$("<td dval="+this.tagName+" align="+align+">" + value + "</td>").appendTo(
 										tableRow);
 							});
 					$(tableRow).appendTo(table);
 				});
-			
+				// Setting a constant width
+				if(colWidth!=null){
+					
+					table.children().find("td,th").css("min-width",colWidth)
+					                              .css("max-width",colWidth)
+					                              .css("word-wrap","break-word"); // word-wrap is a CSS3 style
+				}
+				// change ordering of columns in the order specified by columnOrder (comprises of column dvals
+				if(columnOrder){
+					for(i=1;i<columnOrder.length;i++){
+					  $("[dval="+columnOrder[i]+"]",table).each(function(index){
+						  $(this).insertAfter($(this).parent().find("[dval="+columnOrder[i-1]+"]"));
+					  });
+					
+					}
+					
+				}
+			// Hiding columns specified by hideColumns
+				if(hideColumns)
+				 for(var i=0;i<hideColumns.length;i++){
+					 $("[dval="+hideColumns[i]+"]",table).hide();				   	
+				 }
+				//Change with the values from columnNames
+				if(columnNames){
+					for(index in columnNames)
+						$("thead > tr:last > th[dval="+index+"]",table).html(columnNames[index]);	
+				}
 			// applying styles now
 			$("th",table).each(function() {
 				$(this).addClass("ui-state-default");
@@ -65,26 +109,24 @@
 			}, function() {
 				$(this).children("td").removeClass("ui-state-hover");
 			});
-			$("tr",table).click(function() {
-				$(this).children("td").toggleClass("ui-state-highlight");
-			});
+			if(highlightOnSelect)
+			 $("tr",table).click(function() {
+				 $(this).children("td").toggleClass("ui-state-highlight");
+			 });
 			// Function executes after table is generated
 			if(afterTableCreate!=null){
 				afterTableCreate();
 			}
-			if(colWidth!=null){
-				table.css("width",colWidth);
-			}
 			//adding handlers for search(this is the search logic)
 			$(table).find("tr:first input").keyup(
 					function(event) {
-						var searchValue = (!caseSensitive)?$(this).val().toLowerCase():$(this).val();
+						var searchValue = (!caseSensitiveSearch)?$(this).val().toLowerCase():$(this).val();
 						var positionInDOM = $(this).parent().parent().find("input").index(this);
 						$(this).parent().parent().parent().next().children()
 								.each(
 										function(index) {
 											var tdValue=$(this).find("td").eq(positionInDOM).text();
-											if(!caseSensitive)
+											if(!caseSensitiveSearch)
 												tdValue=tdValue.toLowerCase();
 											if (tdValue.search(searchValue) >= 0)
 												$(this).show(500);
