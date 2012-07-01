@@ -12,8 +12,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import com.vms.dao.DriverDAO;
-import com.vms.dto.DriverDetails;
-import com.vms.dto.DriverList;
+import com.vms.dto.DriverDetailsDTO;
+import com.vms.dto.DriverListDTO;
 
 /**
  * Servlet implementation class DriverServlet
@@ -34,10 +34,10 @@ public class DriverServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			JAXBContext context=JAXBContext.newInstance(DriverList.class);
+			JAXBContext context=JAXBContext.newInstance(DriverListDTO.class);
 			Marshaller marshaller=context.createMarshaller();
-			DriverList DriverList=new DriverList();
-			List<DriverDetails> Drivers=DriverList.getDriver();
+			DriverListDTO DriverList=new DriverListDTO();
+			List<DriverDetailsDTO> Drivers=DriverList.getDriver();
 			Drivers.addAll(new DriverDAO().getListOfDrivers());
 			marshaller.marshal(DriverList, response.getWriter());
 		} catch (JAXBException e) {

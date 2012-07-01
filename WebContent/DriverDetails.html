@@ -11,12 +11,13 @@
     		gridId:"#driverDetailsGrid",
     		addButtonId:"#addDriver",
     		gridColumnOrder:["licenceNo","driverName","dateofJoining","contAddress","phoneNo","recordStatus"],
-    		columnNames:{"licenceNo":"License No","driverName":"Driver Name",
+    		columnNames:{"licenceNo":"License No.","driverName":"Driver Name",
     			         "dateofJoining":"DOJ","contAddress":"Address",
     			         "phoneNo":"Phone No"}
     };
 	// Work Code
-	$(document).ready(function() {
+	function reloadDriverDetailsDataGrid()
+	{
 		var operationsDialog=settingsDriverDetails.OperationsDialog;
 		var gridId=settingsDriverDetails.gridId;
 		var addButtonId=settingsDriverDetails.addButtonId;
@@ -34,18 +35,22 @@
 			                        	  standardistaTableSorting.init();
 			                        	  $(gridId).find("tbody > tr").dblclick(function(){
 			                        		  var selectedRow=$(this);
-			                        		  vmsPopupManager.showUpdatePopup(operationsDialog,selectedRow);
+			                        		  vmsPopupManager.showUpdatePopup(operationsDialog,selectedRow,reloadDriverDetailsDataGrid);
 			                              });
 			                        	  // Handler will be called when + button is clicked
 			                        	  $(addButtonId).click(function(){
-			                        		  vmsPopupManager.showAddPopup(operationsDialog);
+			                        		  vmsPopupManager.showAddPopup(operationsDialog,reloadDriverDetailsDataGrid);
 			                        	  })
 			                          }});
+	}
+	$(document).ready(function() {
+		$(".button").button();
+		reloadDriverDetailsDataGrid();
 	});
 </script>
 </head>
 <body>
-    <input id="addDriver" type=button class="button" style="position:absolute; right:0px" value="+"> <!--  id should be same as addButtonId with # removed -->
+    <input id="addDriver" type=button class="button" style="float:right" value="+"> <!--  id should be same as addButtonId with # removed -->
     <table id="driverDetailsGrid" class="sortable" style="width:100%"/> <!-- id should be same as gridId with # removed -->
 </body>
 </html>

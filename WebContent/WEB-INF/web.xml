@@ -44,4 +44,34 @@
     <servlet-name>DriverServlet</servlet-name>
     <url-pattern>/DriverServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DriverAttendance</display-name>
+    <servlet-name>DriverAttendance</servlet-name>
+    <servlet-class>com.vms.servlets.DriverAttendance</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DriverAttendance</servlet-name>
+    <url-pattern>/DriverAttendance</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DriverAttendanceServlet</display-name>
+    <servlet-name>DriverAttendanceServlet</servlet-name>
+    <servlet-class>com.vms.servlets.DriverAttendanceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DriverAttendanceServlet</servlet-name>
+    <url-pattern>/DriverAttendanceServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddDriverAttendance</display-name>
+    <servlet-name>AddDriverAttendance</servlet-name>
+    <servlet-class>com.vms.servlets.AddDriverAttendance</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDriverAttendance</servlet-name>
+    <url-pattern>/AddDriverAttendance</url-pattern>
+  </servlet-mapping>
 </web-app>

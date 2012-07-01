@@ -30,9 +30,9 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Names the annotated entity class -->
-		<mapping class="com.vms.dto.Vehicle"/>
-		<mapping class="com.vms.dto.DriverDetails"/>
-       <mapping class="com.vms.dto.DriverAttendance"/>
+		<mapping class="com.vms.dto.VehicleDetailsDTO"/>
+		<mapping class="com.vms.dto.DriverDetailsDTO"/>
+       <mapping class="com.vms.dto.DriverAttendanceDTO"/>
 	</session-factory>
 
 </hibernate-configuration>

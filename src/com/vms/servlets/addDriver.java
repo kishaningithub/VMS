@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vms.dao.DriverDAO;
-import com.vms.dto.DriverDetails;
+import com.vms.dto.DriverDetailsDTO;
 
 /**
  * Servlet implementation class addDriver
@@ -33,7 +33,7 @@ public class addDriver extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			DriverDetails driverDetails = new DriverDetails();
+			DriverDetailsDTO driverDetails = new DriverDetailsDTO();
 			DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
 			driverDetails.setLicenceNo(request.getParameter("licenceNo"));
 			driverDetails.setDriverName(request.getParameter("driverName"));

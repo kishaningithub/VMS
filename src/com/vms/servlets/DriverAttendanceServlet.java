@@ -11,36 +11,36 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-
-import com.vms.dao.VehiclesDAO;
-import com.vms.dto.VehicleListDTO;
-import com.vms.dto.VehicleDetailsDTO;
+import com.vms.dao.DriverAttendanceDAO;
+import com.vms.dto.DriverAttendanceConsolidateDTO;
+import com.vms.dto.DriverAttendanceConsolidateListDTO;
 
 
 /**
- * Servlet implementation class Detail
+ * Servlet implementation class DriverAttendanceServlet
  */
-public class VehicleServlet extends HttpServlet {
+public class DriverAttendanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public VehicleServlet() {
-		super();
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DriverAttendanceServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			JAXBContext context=JAXBContext.newInstance(VehicleListDTO.class);
+			JAXBContext context=JAXBContext.newInstance(DriverAttendanceConsolidateListDTO.class);
 			Marshaller marshaller=context.createMarshaller();
-			VehicleListDTO vehicleList=new VehicleListDTO();
-			List<VehicleDetailsDTO> vehicles=vehicleList.getVehicle();
-			vehicles.addAll(new VehiclesDAO().getListOfVehicles());
-			marshaller.marshal(vehicleList, response.getWriter());
+			DriverAttendanceConsolidateListDTO driverAttConsList=new DriverAttendanceConsolidateListDTO();
+			List<DriverAttendanceConsolidateDTO> driverAttList=driverAttConsList.getDriverAttendanceList();
+			driverAttList.addAll(new DriverAttendanceDAO().getListOfDriverAttendances(request.getParameter("attMonth"),request.getParameter("attYear")));
+			marshaller.marshal(driverAttConsList, response.getWriter());
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

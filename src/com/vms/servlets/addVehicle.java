@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vms.dao.VehiclesDAO;
-import com.vms.dto.Vehicle;
+import com.vms.dto.VehicleDetailsDTO;
 
 /**
  * Servlet implementation class addVehicle
@@ -31,7 +31,7 @@ public class addVehicle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Vehicle vehicleDetails = new Vehicle();
+		VehicleDetailsDTO vehicleDetails = new VehicleDetailsDTO();
 		DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
 		try {
 			vehicleDetails.setVehicleNo(request.getParameter("vehicleNo"));

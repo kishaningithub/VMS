@@ -60,7 +60,7 @@
 								var value=Date.parse($(this).text());
 								var align="left";
 								if(value){
-								 value= $.format.date(Date.parse($(this).text()), dateFormat);
+								 value= $.format.date(value, dateFormat);
 								 align="center";
 								}
 								else

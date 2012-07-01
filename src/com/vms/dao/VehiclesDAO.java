@@ -5,18 +5,18 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import com.vms.dto.Vehicle;
+import com.vms.dto.VehicleDetailsDTO;
 import com.vms.util.VmsSessionFactory;
 
 public class VehiclesDAO
 {
 	SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
-	public void addVehicle(Vehicle vehicleDetails)
+	public void addVehicle(VehicleDetailsDTO vehicleDetails)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("veh det"+vehicleDetails.getVehicleNo());
-		Vehicle oldVehicle=(Vehicle)session.get(Vehicle.class,vehicleDetails.getVehicleNo());
+		VehicleDetailsDTO oldVehicle=(VehicleDetailsDTO)session.get(VehicleDetailsDTO.class,vehicleDetails.getVehicleNo());
 		if(oldVehicle!=null)
 			oldVehicle.changeTo(vehicleDetails);
 		else
@@ -25,11 +25,11 @@ public class VehiclesDAO
 		session.getTransaction().commit();
 		session.close();
 	}
-	public List<Vehicle> getListOfVehicles()
+	public List<VehicleDetailsDTO> getListOfVehicles()
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Vehicle where recordStatus='A'");
+		Query query=session.createQuery("from VehicleDetailsDTO where recordStatus='A'");
 		return query.list();
 		
 	}

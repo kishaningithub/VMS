@@ -4,13 +4,18 @@ var vmsDBOper ={
 			var vehicleOperationsForm=$("#"+vmsDBOper.formId);
 			vehicleOperationsForm.find("input[name='recordStatus']").val(recordStatus);
 			$("input:first",vehicleOperationsForm).prop("disabled",false);
+			// trimming all text fields
+			$("input:text").each(function(){
+				$(this).val($.trim($(this).val()));
+			});
+			// form submit via ajax request
 			$.get(vehicleOperationsForm.attr("action"),
 					vehicleOperationsForm.serialize(),
 					  function(data){
 				        vmsAlert(successMessages.operationCompleted);
 				      })
 				      .error(function(){
-				    	  vmsAlert(successMessages.operationCompleted);
+				    	  vmsAlert(errors.operationError);
 				      });
 			$("input:first",vehicleOperationsForm).prop("disabled",false);
 		},

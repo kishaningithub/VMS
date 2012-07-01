@@ -9,6 +9,14 @@ var warnings={
 		             ' </p>'+	
 		             '</div>'
 };
+var errors={
+		operationError:'<div id="operationError" title="Sorry!">'+  
+        ' <p>'+
+        '  <span class="ui-icon ui-icon-notice" style="float:left; margin:0 7px 20px 0;"/>'+
+        '   Internal Error has occured. Sorry for inconvinience'+
+        ' </p>'+	
+        '</div>'
+};
 var successMessages={
 	  operationCompleted:'<div id="operationCompleted" title="Sucess">'+  
                           ' <p>'+
@@ -18,11 +26,13 @@ var successMessages={
                           '</div>'
 };
 $(document).ready(function(){
-	$(".date").datepicker({dateFormat:datepickerDateFormat}); 
-	$(".button").button();
+	$("#driverAttendance").load("DriverAttendancePage.html");
 	$("#vehicleDetails").load("VehicleDetails.html");
 	$("#driverDetails").load("DriverDetails.html");
 	$("#vmsMenu").tabs();
+	$(".date").datepicker({dateFormat:datepickerDateFormat}); 
+	$(".button").button();
+	$( "#accordion" ).accordion({event: "mouseover"});
 });
 function returnResponse(urlLink)
 {

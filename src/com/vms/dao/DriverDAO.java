@@ -5,17 +5,17 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import com.vms.dto.DriverDetails;
+import com.vms.dto.DriverDetailsDTO;
 import com.vms.util.VmsSessionFactory;
 
 public class DriverDAO
 {
 	SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
-	public void addDriver(DriverDetails driverDetails)
+	public void addDriver(DriverDetailsDTO driverDetails)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		DriverDetails oldDriver=(DriverDetails)session.get(DriverDetails.class,driverDetails.getLicenceNo());
+		DriverDetailsDTO oldDriver=(DriverDetailsDTO)session.get(DriverDetailsDTO.class,driverDetails.getLicenceNo());
 		if(oldDriver!=null)
 			oldDriver.changeTo(driverDetails);
 		else
@@ -25,11 +25,11 @@ public class DriverDAO
 		session.close();
 	}
 	
-	public List<DriverDetails> getListOfDrivers()
+	public List<DriverDetailsDTO> getListOfDrivers()
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from DriverDetails where recordStatus='A'");
+		Query query=session.createQuery("from DriverDetailsDTO where recordStatus='A'");
 		return query.list();
 	}
 

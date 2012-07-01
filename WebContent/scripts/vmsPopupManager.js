@@ -1,5 +1,5 @@
 var vmsPopupManager={
-		"showAddPopup":function(operationsDialog){
+		"showAddPopup":function(operationsDialog,onClose){
 			  operationsDialog.find(".date").datepicker({dateFormat:datepickerDateFormat});
 			  operationsDialog.find(":text").val("");
     		  operationsDialog.find("input:first").prop("disabled",false);
@@ -9,11 +9,14 @@ var vmsPopupManager={
     				  vmsDBOper.formId=operationsDialog.attr("id");
     				  vmsDBOper.add();
     				  $(this).dialog("close");
-    			  }
+    			  },
     		   },
+    		   close:function(){
+    			   onClose();
+  		       },
     		   width:"680px",show:globalPopupEffect,hide:globalPopupEffect});
 		},
-		"showUpdatePopup":function(operationsDialog,selectedRow){
+		"showUpdatePopup":function(operationsDialog,selectedRow,onClose){
 			operationsDialog.find("input:text").each(function(){
 				var textBox=$(this);
 				textBox.val(selectedRow.find("td[dval="+textBox.attr("name")+"]").text());
@@ -32,6 +35,9 @@ var vmsPopupManager={
 				   $(this).dialog("close");
 			   }
 			  },
+			  close:function(){
+   			   onClose();
+ 		       },
 			  width:"680px",show:globalPopupEffect,hide:globalPopupEffect,modal:true});
 		}
 };
