@@ -11,3 +11,7 @@ insert into DriverAttendanceDTO
 values(2,sysdate-1,0,1,'A','Lic123','TN 20 BX 8219');
 insert into DriverAttendanceDTO
 values(3,sysdate-1,0,0,'A','Lic123','TN 20 BX 8219');
+
+select * from Clarificationmatrix;
+delete  from userdata;
+select * from userdata;

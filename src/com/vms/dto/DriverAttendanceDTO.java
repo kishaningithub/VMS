@@ -1,39 +1,28 @@
 package com.vms.dto;
 
-import java.util.Date;
-
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
 @Entity
 public class DriverAttendanceDTO
 {
-	@Id @GeneratedValue
-	Integer attId;
-	@OneToOne
-	DriverDetailsDTO licenceNo;
-	@OneToOne
+	@EmbeddedId
+	DriverAtt attId;
+	@ManyToOne
 	VehicleDetailsDTO vehicleNo; 
-	Date dateOfAtt;  
 	Boolean present; //P or A - Present or absent
 	Integer overTime; //(No. of hrs) 
 	String recordStatus;
-	public Integer getAttId()
+	
+	public DriverAtt getAttId()
 	{
 		return attId;
 	}
-	public void setAttId(Integer attId)
+	public void setAttId(DriverAtt attId)
 	{
 		this.attId = attId;
-	}
-	public DriverDetailsDTO getLicenceNo()
-	{
-		return licenceNo;
-	}
-	public void setLicenceNo(DriverDetailsDTO licenceNo)
-	{
-		this.licenceNo = licenceNo;
 	}
 	public VehicleDetailsDTO getVehicleNo()
 	{
@@ -42,14 +31,6 @@ public class DriverAttendanceDTO
 	public void setVehicleNo(VehicleDetailsDTO vehicleNo)
 	{
 		this.vehicleNo = vehicleNo;
-	}
-	public Date getDate()
-	{
-		return dateOfAtt;
-	}
-	public void setDate(Date date)
-	{
-		this.dateOfAtt = date;
 	}
 	public Boolean getPresent()
 	{

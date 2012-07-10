@@ -41,7 +41,12 @@ public class DriverAttendanceServlet extends HttpServlet {
 			List<DriverAttendanceConsolidateDTO> driverAttList=driverAttConsList.getDriverAttendanceList();
 			driverAttList.addAll(new DriverAttendanceDAO().getListOfDriverAttendances(request.getParameter("attMonth"),request.getParameter("attYear")));
 			marshaller.marshal(driverAttConsList, response.getWriter());
-		} catch (JAXBException e) {
+		
+		}
+		catch (NumberFormatException e) {
+			response.sendError(500, "Please enter proper dates");
+		}
+		catch (JAXBException e) {
 			e.printStackTrace();
 		}
 	}

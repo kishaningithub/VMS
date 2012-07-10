@@ -31,7 +31,6 @@ public class VehiclesDAO
 		session.beginTransaction();
 		Query query=session.createQuery("from VehicleDetailsDTO where recordStatus='A'");
 		return query.list();
-		
 	}
 }
 

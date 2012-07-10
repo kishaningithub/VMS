@@ -26,7 +26,7 @@ var successMessages={
                           '</div>'
 };
 $(document).ready(function(){
-	$("#driverAttendance").load("DriverAttendancePage.html");
+	$("#driverAttendance").load("DriverAttendance.html");
 	$("#vehicleDetails").load("VehicleDetails.html");
 	$("#driverDetails").load("DriverDetails.html");
 	$("#vmsMenu").tabs();
@@ -45,6 +45,20 @@ function returnResponse(urlLink)
 function vmsAlert(message)
 {
 	$(message).dialog({buttons:{
+		"Ok":function(){
+			$(this).dialog("close");
+		}
+	   },modal:true,show:globalPopupEffect,hide:globalPopupEffect});
+}
+function vmsError(message)
+{
+	var errorMessage='<div id="operationError" title="Sorry!">'+  
+    ' <p>'+
+    '  <span class="ui-icon ui-icon-notice" style="float:left; margin:0 7px 20px 0;"/>'+
+     message +
+    ' </p>'+	
+    '</div>';
+	$(errorMessage).dialog({buttons:{
 		"Ok":function(){
 			$(this).dialog("close");
 		}

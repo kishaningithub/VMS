@@ -43,6 +43,7 @@ public class VehicleServlet extends HttpServlet {
 			marshaller.marshal(vehicleList, response.getWriter());
 		} catch (JAXBException e) {
 			e.printStackTrace();
+		
 		}
 	}
 
