@@ -5,7 +5,7 @@
 <title>DriverAttendance</title>
 <script>
 var settingsDriverAttendanceDetails={
-		gridDataSource:"DriverAttendanceServlet",
+		gridDataSource:"vmsDataGridSource?showGrid=driverattendance",
 		OperationsDialog:null,
 		gridId:"#driverAttendanceGrid",
 		gridColumnOrder:null,
@@ -39,7 +39,6 @@ $(document).ready(function(){
 			      })
 			      .error(function(xhr){
 			    	 vmsError(xhr.responseText);
-			    	 
 			      });
 	});
 	reloadDriverAttendanceDataGrid();

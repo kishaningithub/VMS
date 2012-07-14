@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -16,6 +17,7 @@ public class DriverDetailsDTO
 	Date dateofJoining;
 	String contAddress;
 	String phoneNo;
+	@ManyToOne
 	Region workLocation;
 	String recordStatus;
 	

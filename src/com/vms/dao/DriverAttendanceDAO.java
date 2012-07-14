@@ -23,6 +23,7 @@ public class DriverAttendanceDAO
 	}
 
 	public List<DriverAttendanceConsolidateDTO> getListOfDriverAttendances(String attMon, String attYear)
+	
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();

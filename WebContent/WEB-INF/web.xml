@@ -84,4 +84,14 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/UserServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>vmsDataGridSource</display-name>
+    <servlet-name>vmsDataGridSource</servlet-name>
+    <servlet-class>com.vms.servlets.vmsDataGridSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>vmsDataGridSource</servlet-name>
+    <url-pattern>/vmsDataGridSource</url-pattern>
+  </servlet-mapping>
 </web-app>
