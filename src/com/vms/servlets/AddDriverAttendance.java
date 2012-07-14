@@ -15,7 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 
 import com.vms.dao.DriverAttendanceDAO;
-import com.vms.dto.DriverAtt;
+import com.vms.dto.DriverAttendanceDTO;
 import com.vms.dto.DriverAttendanceDTO;
 import com.vms.dto.DriverDetailsDTO;
 import com.vms.dto.VehicleDetailsDTO;
@@ -43,18 +43,17 @@ public class AddDriverAttendance extends HttpServlet {
 		DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
 		try {
 			
-			DriverAtt driverAtt=new DriverAtt();
+			DriverAttendanceDTO driverAtt=new DriverAttendanceDTO();
 			SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
 			Session session=sessionFactory.openSession();
 			session.beginTransaction();
-			driverAtt.setDateOfAtt((dateFormater.parse(request.getParameter("dateOfAtt"))));
-			driverAtt.setLicenceNo((DriverDetailsDTO)session.get(DriverDetailsDTO.class,request.getParameter("licenceNo")));
+			driverAtt.getAttId().setDateOfAtt((dateFormater.parse(request.getParameter("dateOfAtt"))));
+			driverAtt.getAttId().setLicenceNo((DriverDetailsDTO)session.get(DriverDetailsDTO.class,request.getParameter("licenceNo")));
 			driverAttendanceDetails.setVehicleNo((VehicleDetailsDTO)session.get(VehicleDetailsDTO.class,request.getParameter("vehicleNo")));
-			if(driverAtt.getLicenceNo()==null)
+			if(driverAtt.getAttId().getLicenceNo()==null)
 				throw new IllegalArgumentException("The given License No. does not exist");
 			else if(driverAttendanceDetails.getVehicleNo()==null)
 				throw new IllegalArgumentException("The given vehicle No. does not exist");
-			driverAttendanceDetails.setAttId(driverAtt);
 			driverAttendanceDetails.setPresent(new Boolean(request.getParameter("present")));
 			driverAttendanceDetails.setOverTime(Integer.parseInt(request.getParameter("overTime")));
 			driverAttendanceDetails.setRecordStatus(request.getParameter("recordStatus"));

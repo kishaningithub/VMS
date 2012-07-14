@@ -9,18 +9,18 @@ import javax.persistence.ManyToOne;
 public class DriverAttendanceDTO
 {
 	@EmbeddedId
-	DriverAtt attId;
+	DriverAttKeyDTO attId;
 	@ManyToOne
 	VehicleDetailsDTO vehicleNo; 
 	Boolean present; //P or A - Present or absent
 	Integer overTime; //(No. of hrs) 
 	String recordStatus;
 	
-	public DriverAtt getAttId()
+	public DriverAttKeyDTO getAttId()
 	{
 		return attId;
 	}
-	public void setAttId(DriverAtt attId)
+	public void setAttId(DriverAttKeyDTO attId)
 	{
 		this.attId = attId;
 	}

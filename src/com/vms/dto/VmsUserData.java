@@ -10,7 +10,7 @@ public class VmsUserData extends UserData
 {
 	String role;
 	@ManyToOne
-	Region workLocation;
+	RegionDTO workLocation;
 	public VmsUserData() {}
 	public String getRole()
 	{

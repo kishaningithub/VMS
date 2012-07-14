@@ -30,7 +30,7 @@
 		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Names the annotated entity class -->
-		<mapping class="com.vms.dto.Region"/>
+		<mapping class="com.vms.dto.RegionDTO"/>
 		<mapping class="com.vms.util.UserData"/>
 		<mapping class="com.vms.dto.VmsUserData"/>
 		<mapping class="com.vms.dto.VehicleDetailsDTO"/>

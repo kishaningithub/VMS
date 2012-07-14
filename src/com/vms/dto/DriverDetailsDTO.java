@@ -18,7 +18,7 @@ public class DriverDetailsDTO
 	String contAddress;
 	String phoneNo;
 	@ManyToOne
-	Region workLocation;
+	RegionDTO workLocation;
 	String recordStatus;
 	
 	public String getLicenceNo()
@@ -71,12 +71,12 @@ public class DriverDetailsDTO
 		this.phoneNo = phoneNo;
 	}
 
-	public Region getWorkLocation()
+	public RegionDTO getWorkLocation()
 	{
 		return workLocation;
 	}
 
-	public void setWorkLocation(Region workLocation)
+	public void setWorkLocation(RegionDTO workLocation)
 	{
 		this.workLocation = workLocation;
 	}
