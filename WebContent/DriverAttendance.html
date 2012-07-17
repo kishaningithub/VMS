@@ -8,6 +8,8 @@ var settingsDriverAttendanceDetails={
 		gridDataSource:"vmsDataGridSource?showGrid=driverattendance",
 		OperationsDialog:null,
 		gridId:"#driverAttendanceGrid",
+		addButtonId:null,
+		hideColumns:null,
 		gridColumnOrder:null,
 		columnNames:{"driverName":"Driver Name ","licenceNo":"License No.","present":"Present days"}
 };
@@ -45,25 +47,9 @@ $(document).ready(function(){
 });
 function reloadDriverAttendanceDataGrid()
 {
-	var operationsDialog=settingsDriverAttendanceDetails.OperationsDialog;
-	var gridId=settingsDriverAttendanceDetails.gridId;
-	var addButtonId=settingsDriverAttendanceDetails.addButtonId;
-	var gridColumnOrder=settingsDriverAttendanceDetails.gridColumnOrder;
-	var columnNames=settingsDriverAttendanceDetails.columnNames;
-	$(gridId).datagrid({dataSource:settingsDriverAttendanceDetails.gridDataSource+"?attMonth="+$("#attMonth").val()+"&attYear="+$("#attYear").val(),
-		                          dateFormat: gridDateFormat,
-		                          highlightOnSelect:false,
-		                          loadingGif:"images/loading.gif",
-		                          colWidth:'1px', // just width magic!
-		                          hideColumns:['recordStatus'],
-		                          columnOrder:gridColumnOrder,
-		                          columnNames:columnNames,
-		                          afterTableCreate:function(){
-		                        	  standardistaTableSorting.init();
-		                          }});
+	settingsDriverAttendanceDetails.gridDataSource+="&attMonth="+$("#attMonth").val()+"&attYear="+$("#attYear").val()
+	reloadVmsGrid(settingsDriverAttendanceDetails);
 }
-
- 
 </script>
 </head>
 <body>

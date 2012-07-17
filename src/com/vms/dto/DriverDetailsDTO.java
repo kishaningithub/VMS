@@ -97,6 +97,7 @@ public class DriverDetailsDTO
 		setDriverName(driver.getDriverName());
 		setDateofJoining(driver.getDateofJoining());
 		setContAddress(driver.getContAddress());
+		setWorkLocation(driver.getWorkLocation());
 		setPhoneNo(driver.getPhoneNo());
 		setRecordStatus(driver.getRecordStatus());
 	}

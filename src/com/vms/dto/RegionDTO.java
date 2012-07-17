@@ -3,14 +3,18 @@ package com.vms.dto;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
-@Entity
+@Entity @XmlRootElement
 public class RegionDTO
 {
-    @Id @GeneratedValue
-	Integer regionCode;
+  	@Id @GeneratedValue
+  	Integer regionCode;
 	String regionName;
-	public Integer getRegionCode()
+	String recordStatus;
+	// Getters and Setters
+  	public Integer getRegionCode()
 	{
 		return regionCode;
 	}
@@ -26,6 +30,18 @@ public class RegionDTO
 	{
 		this.regionName = regionName;
 	}
-	
-
+	public String getRecordStatus()
+	{
+		return recordStatus;
+	}
+	public void setRecordStatus(String recordStatus)
+	{
+		this.recordStatus = recordStatus;
+	}
+	// Other functions
+	public void changeTo(RegionDTO regionDetails)
+	{
+		setRegionName(regionDetails.getRegionName());
+		setRecordStatus(regionDetails.getRecordStatus());
+	}
 }

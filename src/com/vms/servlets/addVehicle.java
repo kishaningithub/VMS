@@ -34,19 +34,25 @@ public class addVehicle extends HttpServlet {
 		VehicleDetailsDTO vehicleDetails = new VehicleDetailsDTO();
 		DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
 		try {
-			vehicleDetails.setVehicleNo(request.getParameter("vehicleNo"));
-			vehicleDetails.setVehicleDesc(request.getParameter("vehicleDesc"));
-			vehicleDetails.setOwnerName(request.getParameter("ownerName"));
-			vehicleDetails.setInsuranceNo(request.getParameter("insuranceNo"));
-			vehicleDetails.setInsuranceStartDate(dateFormater.parse(request.getParameter("insuranceStartDate")));
-			vehicleDetails.setInsuranceEndDate(dateFormater.parse(request.getParameter("insuranceEndDate")));
-			vehicleDetails.setRcNo(request.getParameter("rcNo"));
-			vehicleDetails.setFcDate(dateFormater.parse(request.getParameter("fcDate")));
-			vehicleDetails.setRecordStatus(request.getParameter("recordStatus"));
+			vehicleDetails.setVehicleNo(request.getParameter("vehicleNo").trim());
+			vehicleDetails.setVehicleDesc(request.getParameter("vehicleDesc").trim());
+			vehicleDetails.setOwnerName(request.getParameter("ownerName").trim());
+			vehicleDetails.setInsuranceNo(request.getParameter("insuranceNo").trim());
+			vehicleDetails.setInsuranceStartDate(dateFormater.parse(request.getParameter("insuranceStartDate").trim()));
+			vehicleDetails.setInsuranceEndDate(dateFormater.parse(request.getParameter("insuranceEndDate").trim()));
+			vehicleDetails.setRcNo(request.getParameter("rcNo").trim());
+			vehicleDetails.setFcDate(dateFormater.parse(request.getParameter("fcDate").trim()));
+			vehicleDetails.setRecordStatus(request.getParameter("recordStatus").trim());
 			new VehiclesDAO().addVehicle(vehicleDetails);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			response.setStatus(500);
+			response.getWriter().print("Please enter proper dates");
 		}
+		catch (NullPointerException e) {
+			response.setStatus(403);
+			response.getWriter().print("Hacker Get Lost!");
+		}
+		
 	}
 
 	/**

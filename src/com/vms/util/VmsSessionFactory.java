@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 public class VmsSessionFactory
 {
   private static SessionFactory sessionFactory;
+  private VmsSessionFactory(){}
   public static SessionFactory getSessionFactory()
   {
 	  if(sessionFactory==null)

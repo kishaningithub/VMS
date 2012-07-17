@@ -94,4 +94,14 @@
     <servlet-name>vmsDataGridSource</servlet-name>
     <url-pattern>/vmsDataGridSource</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>addRegion</display-name>
+    <servlet-name>addRegion</servlet-name>
+    <servlet-class>com.vms.servlets.addRegion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addRegion</servlet-name>
+    <url-pattern>/addRegion</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,2 +1,4 @@
-VehicleDetailsDTO
 VmsListXmlHolder
+VehicleDetailsDTO
+DriverDetailsDTO
+DriverAttendanceConsolidateDTO

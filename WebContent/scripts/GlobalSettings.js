@@ -29,6 +29,7 @@ $(document).ready(function(){
 	$("#driverAttendance").load("DriverAttendance.html");
 	$("#vehicleDetails").load("VehicleDetails.html");
 	$("#driverDetails").load("DriverDetails.html");
+	$("#Region").load("Region.html");
 	$("#vmsMenu").tabs();
 	$(".date").datepicker({dateFormat:datepickerDateFormat}); 
 	$(".button").button();

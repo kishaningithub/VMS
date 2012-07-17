@@ -87,7 +87,7 @@
 					}
 					
 				}
-			// Hiding columns specified by hideColumns
+			    // Hiding columns specified by hideColumns
 				if(hideColumns)
 				 for(var i=0;i<hideColumns.length;i++){
 					 $("[dval="+hideColumns[i]+"]",table).hide();				   	
@@ -96,6 +96,10 @@
 				if(columnNames){
 					for(index in columnNames)
 						$("thead > tr:last > th[dval="+index+"]",table).html(columnNames[index]);	
+				}
+				// Function executes after table is generated
+				if(afterTableCreate!=null){
+					afterTableCreate();
 				}
 			// applying styles now
 			$("th",table).each(function() {
@@ -113,10 +117,6 @@
 			 $("tr",table).click(function() {
 				 $(this).children("td").toggleClass("ui-state-highlight");
 			 });
-			// Function executes after table is generated
-			if(afterTableCreate!=null){
-				afterTableCreate();
-			}
 			//adding handlers for search(this is the search logic)
 			$(table).find("tr:first input").keyup(
 					function(event) {

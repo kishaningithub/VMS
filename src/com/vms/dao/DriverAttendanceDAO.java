@@ -1,14 +1,16 @@
 package com.vms.dao;
 
 import java.util.List;
+
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 
-import com.vms.dto.DriverAttKeyDTO;
 import com.vms.dto.DriverAttendanceConsolidateDTO;
 import com.vms.dto.DriverAttendanceDTO;
+import com.vms.util.Logger;
 import com.vms.util.VmsSessionFactory;
 
 public class DriverAttendanceDAO
@@ -16,6 +18,7 @@ public class DriverAttendanceDAO
 	SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
 	public void addDriverAttendance(DriverAttendanceDTO driverAttendanceDTO) throws ConstraintViolationException
 	{
+		Logger.log("Inside addDriverAttendance");
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(driverAttendanceDTO);
@@ -26,6 +29,7 @@ public class DriverAttendanceDAO
 	public List<DriverAttendanceConsolidateDTO> getListOfDriverAttendances(String attMon, String attYear)
 	
 	{
+		Logger.log("Inside getListOfDriverAttendances");
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		Query query=session.createQuery(" select new com.vms.dto.DriverAttendanceConsolidateDTO(driver.licenceNo,driver.driverName,count(att.present))" +
@@ -39,6 +43,8 @@ public class DriverAttendanceDAO
 				" group by driver.licenceNo,driver.driverName");
 		query.setInteger("attMon", Integer.parseInt(attMon));
 		query.setInteger("attYear", Integer.parseInt(attYear));
-		return query.list();
+		List<DriverAttendanceConsolidateDTO> list = query.list();
+		session.close();
+		return list;
 	}
 }

@@ -27,15 +27,15 @@
 		<property name="show_sql">true</property>
 
 		<!-- Drop and re-create the database schema on startup -->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Names the annotated entity class -->
-		<mapping class="com.vms.dto.RegionDTO"/>
-		<mapping class="com.vms.util.UserData"/>
-		<mapping class="com.vms.dto.VmsUserData"/>
+ 		<mapping class="com.vms.dto.RegionDTO"/> 
+<!-- 		<mapping class="com.vms.util.UserData"/> -->
+<!--  		<mapping class="com.vms.dto.VmsUserData"/>  -->
 		<mapping class="com.vms.dto.VehicleDetailsDTO"/>
 		<mapping class="com.vms.dto.DriverDetailsDTO"/>
-        <mapping class="com.vms.dto.DriverAttendanceDTO"/>
+<!--         <mapping class="com.vms.dto.DriverAttendanceDTO"/> -->
         
 	</session-factory>
 

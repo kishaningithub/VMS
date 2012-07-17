@@ -10,8 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.vms.dao.DriverDAO;
 import com.vms.dto.DriverDetailsDTO;
+import com.vms.dto.RegionDTO;
+import com.vms.util.VmsSessionFactory;
 
 /**
  * Servlet implementation class addDriver
@@ -32,19 +37,30 @@ public class addDriver extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
+		Session session=sessionFactory.openSession();
 		try {
 			DriverDetailsDTO driverDetails = new DriverDetailsDTO();
 			DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
-			driverDetails.setLicenceNo(request.getParameter("licenceNo"));
-			driverDetails.setDriverName(request.getParameter("driverName"));
-			driverDetails.setDateofJoining(dateFormater.parse(request.getParameter("dateofJoining")));
-			driverDetails.setContAddress(request.getParameter("contAddress"));
-			driverDetails.setPhoneNo(request.getParameter("phoneNo"));
-			driverDetails.setRecordStatus(request.getParameter("recordStatus"));
+			session.beginTransaction();
+			driverDetails.setLicenceNo(request.getParameter("licenceNo").trim());
+			driverDetails.setDriverName(request.getParameter("driverName").trim());
+			driverDetails.setDateofJoining(dateFormater.parse(request.getParameter("dateofJoining").trim()));
+			driverDetails.setContAddress(request.getParameter("contAddress").trim());
+			driverDetails.setWorkLocation((RegionDTO)session.get(RegionDTO.class, Integer.parseInt(request.getParameter("workLocation").trim())));
+			driverDetails.setPhoneNo(request.getParameter("phoneNo").trim());
+			driverDetails.setRecordStatus(request.getParameter("recordStatus").trim());
 			new DriverDAO().addDriver(driverDetails);
 		} catch (ParseException e) {
-
-			e.printStackTrace();
+			response.setStatus(500);
+			response.getWriter().print("Please enter proper dates");
+		}
+		catch (NullPointerException e) {
+			response.setStatus(403);
+			response.getWriter().print("Hacker Get Lost!");
+		}
+		finally{
+			session.close();
 		}
 	}
 

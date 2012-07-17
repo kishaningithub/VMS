@@ -13,9 +13,11 @@ import javax.xml.bind.Marshaller;
 
 import com.vms.dao.DriverAttendanceDAO;
 import com.vms.dao.DriverDAO;
+import com.vms.dao.RegionDAO;
 import com.vms.dao.VehiclesDAO;
 import com.vms.dto.VehicleDetailsDTO;
 import com.vms.dto.VmsListXmlHolder;
+import com.vms.util.Logger;
 import com.vms.util.vmsJaxbContext;
 
 /**
@@ -37,6 +39,7 @@ public class vmsDataGridSource extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			Logger.log("Inside datagridSource servlet");
 			String showGrid=request.getParameter("showGrid").trim();
 			JAXBContext context=vmsJaxbContext.getVmsJaxbContext();
 			VmsListXmlHolder vmsList=new VmsListXmlHolder();
@@ -44,14 +47,19 @@ public class vmsDataGridSource extends HttpServlet {
 				vmsList.getVmsDTO().addAll(new VehiclesDAO().getListOfVehicles());
 			else if(showGrid.equalsIgnoreCase("drivers"))
 				vmsList.getVmsDTO().addAll(new DriverDAO().getListOfDrivers());
-			else if(showGrid.equalsIgnoreCase("driverattendance"))
-				vmsList.getVmsDTO().addAll(new DriverAttendanceDAO().getListOfDriverAttendances(request.getParameter("attMonth"),request.getParameter("attYear")));
+			else if(showGrid.equalsIgnoreCase("regions"))
+				vmsList.getVmsDTO().addAll(new RegionDAO().getListOfRegions());
+//			else if(showGrid.equalsIgnoreCase("driverattendance"))
+//				vmsList.getVmsDTO().addAll(new DriverAttendanceDAO().getListOfDriverAttendances(request.getParameter("attMonth"),request.getParameter("attYear")));
+//			else
+//				return;
 			context.createMarshaller().marshal(vmsList, response.getWriter());
 		} 
 		catch (JAXBException e) {
 			e.printStackTrace();
 		}
 		catch (NullPointerException e) {
+			e.printStackTrace();
 			response.getWriter().print("Hacker Get Lost!!");
 		}
 	}

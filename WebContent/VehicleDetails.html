@@ -6,10 +6,11 @@
 <script>
     // Configuration - Make all changes here alone :-)
     var settingsVehicleDetails={
-    		gridDataSource:"vmsDataGridSource?showGrid=drivers",
+    		gridDataSource:"vmsDataGridSource?showGrid=vehicles",
     		OperationsDialog:returnResponse("VehicleForm.html"),
     		gridId:"#vehicleDetailsGrid",
     		addButtonId:"#addVehicle",
+    		hideColumns:['recordStatus'],
     		gridColumnOrder:["vehicleNo","vehicleDesc","ownerName","insuranceNo","insuranceStartDate","insuranceEndDate","rcNo","fcDate","recordStatus"],
     		columnNames:{"vehicleNo":"Vehicle No.","vehicleDesc":"Description","ownerName":"Owner",
     			         "insuranceNo":"Insurance No.","insuranceStartDate":"Ins. Start date",
@@ -18,30 +19,7 @@
     // Work Code
     function reloadVehicleDetailsDataGrid()
     {
-    	var operationsDialog=settingsVehicleDetails.OperationsDialog;
-		var gridId=settingsVehicleDetails.gridId;
-		var addButtonId=settingsVehicleDetails.addButtonId;
-		var gridColumnOrder=settingsVehicleDetails.gridColumnOrder;
-		var columnNames=settingsVehicleDetails.columnNames;
-		$(gridId).datagrid({dataSource:settingsVehicleDetails.gridDataSource,
-			                          dateFormat: gridDateFormat,
-			                          highlightOnSelect:false,
-			                          loadingGif:"images/loading.gif",
-			                          colWidth:'1px', // just width magic!
-			                          hideColumns:['recordStatus'],
-			                          columnOrder:gridColumnOrder,
-			                          columnNames:columnNames,
-			                          afterTableCreate:function(){
-			                        	  standardistaTableSorting.init();
-			                        	  $(gridId).find("tbody > tr").dblclick(function(){
-			                        		  var selectedRow=$(this);
-			                        		  vmsPopupManager.showUpdatePopup(operationsDialog,selectedRow,reloadVehicleDetailsDataGrid);
-			                              });
-			                        	  // Handler will be called when + button is clicked
-			                        	  $(addButtonId).click(function(){
-			                        		  vmsPopupManager.showAddPopup(operationsDialog,reloadVehicleDetailsDataGrid);
-			                        	  })
-			                          }});
+    	reloadVmsGrid(settingsVehicleDetails);
     }
 	$(document).ready(function() {
 		 $(".button").button();

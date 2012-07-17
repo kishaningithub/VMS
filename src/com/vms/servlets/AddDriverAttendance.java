@@ -40,25 +40,23 @@ public class AddDriverAttendance extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DriverAttendanceDTO driverAttendanceDetails = new DriverAttendanceDTO();
-		DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
+		SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
+		Session session=sessionFactory.openSession();
 		try {
-			
 			DriverAttendanceDTO driverAtt=new DriverAttendanceDTO();
-			SessionFactory sessionFactory=VmsSessionFactory.getSessionFactory();
-			Session session=sessionFactory.openSession();
+			DateFormat dateFormater=new SimpleDateFormat("dd/MMM/yyyy");
 			session.beginTransaction();
-			driverAtt.getAttId().setDateOfAtt((dateFormater.parse(request.getParameter("dateOfAtt"))));
-			driverAtt.getAttId().setLicenceNo((DriverDetailsDTO)session.get(DriverDetailsDTO.class,request.getParameter("licenceNo")));
-			driverAttendanceDetails.setVehicleNo((VehicleDetailsDTO)session.get(VehicleDetailsDTO.class,request.getParameter("vehicleNo")));
+			driverAtt.getAttId().setDateOfAtt((dateFormater.parse(request.getParameter("dateOfAtt").trim())));
+			driverAtt.getAttId().setLicenceNo((DriverDetailsDTO)session.get(DriverDetailsDTO.class,request.getParameter("licenceNo").trim()));
+			driverAttendanceDetails.setVehicleNo((VehicleDetailsDTO)session.get(VehicleDetailsDTO.class,request.getParameter("vehicleNo").trim()));
 			if(driverAtt.getAttId().getLicenceNo()==null)
 				throw new IllegalArgumentException("The given License No. does not exist");
 			else if(driverAttendanceDetails.getVehicleNo()==null)
 				throw new IllegalArgumentException("The given vehicle No. does not exist");
-			driverAttendanceDetails.setPresent(new Boolean(request.getParameter("present")));
-			driverAttendanceDetails.setOverTime(Integer.parseInt(request.getParameter("overTime")));
-			driverAttendanceDetails.setRecordStatus(request.getParameter("recordStatus"));
+			driverAttendanceDetails.setPresent(new Boolean(request.getParameter("present").trim()));
+			driverAttendanceDetails.setOverTime(Integer.parseInt(request.getParameter("overTime").trim()));
+			driverAttendanceDetails.setRecordStatus(request.getParameter("recordStatus").trim());
 			new DriverAttendanceDAO().addDriverAttendance(driverAttendanceDetails);
-			session.close();
 		}
 		catch (NumberFormatException e) {
 			response.setStatus(500);
@@ -75,6 +73,13 @@ public class AddDriverAttendance extends HttpServlet {
 		catch (ConstraintViolationException e) {
 			response.setStatus(500);
 			response.getWriter().print("Cannot put attendance for a person more than once");
+		}
+		catch (NullPointerException e) {
+			response.setStatus(403);
+			response.getWriter().print("Hacker Get Lost!");
+		}
+		finally{
+			session.close();
 		}
 	}
 

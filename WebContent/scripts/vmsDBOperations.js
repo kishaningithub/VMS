@@ -25,7 +25,7 @@ var vmsDBOper ={
 		"update":function(){
 			vmsDBOper.updateCore('A');// core logic
 		},
-		"del":function(){// Just shows a dialog and triggers updateCore() with parameter D
+		"del":function(dataGridSettings){// Just shows a dialog and triggers updateCore() with parameter D
 			$(warnings.deleteWarning).dialog({
 				buttons: {
 					"Delete": function() {
@@ -36,7 +36,11 @@ var vmsDBOper ={
 							$( this ).dialog( "close" );
 					}
 				  },
-				  modal: true,show:globalPopupEffect,hide:globalPopupEffect
+				  modal: true,show:globalPopupEffect,hide:globalPopupEffect,
+				  close:function()
+				  {
+					  reloadVmsGrid(dataGridSettings); 
+				  }
 				});
 		}
 };

@@ -15,3 +15,4 @@ values(3,sysdate-1,0,0,'A','Lic123','TN 20 BX 8219');
 select * from Clarificationmatrix;
 delete  from userdata;
 select * from userdata;
+select * from regiondto;
