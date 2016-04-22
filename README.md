@@ -1,5 +1,5 @@
-# VMS
-A vehicle management system.
-1) Notifies you when FC is due.
-2) Manages your driver and vehicle information.
+# VMS - A vehicle management system.
+
+-  Notifies you when FC is due.
+- Manages your driver and vehicle information.
   
